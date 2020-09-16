@@ -5,10 +5,9 @@ import copy
 teams = copy.deepcopy(constants.TEAMS)
 players = copy.deepcopy(constants.PLAYERS)
 
-# Covert height to integer
 
-# Convert experience to bool
-# HINT: Think Lists with nested Dictionaries might be one way
+
+
 
 # function that balances players across the three teams
     # Ex: num_players_team = len(PLAYERS) / len(TEAMS)
@@ -45,8 +44,28 @@ def display_teams():
         ("Enter a valid number")
 
 
+def convert_player_values():
+    for player in players:
+    # Converts height to integer
+        height = player['height'].split(" ")
+        player['height'] = int(height[0])
+        player['experience'] = bool(player['experience'])
 
+    # Converts experience to boolean
+        if player['experience'] == "YES":
+            player['experience'] = bool("YES")
+        elif player['experience'] == "NO":
+            player['experience'] = bool("")
+        
+        print(player['experience'])
 
 
 if __name__ == "__main__":
-    menu()
+    convert_player_values()
+    # menu()
+    # Covert height to integer
+
+
+    # Convert experience to bool
+
+
