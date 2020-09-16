@@ -75,10 +75,8 @@ def guardian_list(team):
     guardian = []
     print("\n        Guardians:")
     for i in range(0, 6, 1):
-        guardian.append(team[i]['guardians'].split(","))
-    # ", ".join(guardian)
-        guardian.split("and")
-    print(guardian)
+        guardian.append(", ".join(team[i]["guardians"].split(" and ")))
+    print("    " + ", ".join(guardian))
 
 
 def display_team(team_name, team):
@@ -87,8 +85,8 @@ def display_team(team_name, team):
     for i in range(0, 6, 1):
         print("          " + team[i]['name'])
     guardian_list(team)
-    print("\n\n There are {} experienced players, {} inexperienced players, and {} total players on this team.")
-    print("The average height is: {}\n")
+    print("\n\n    There are {} experienced players, {} inexperienced players, and {} total players on this team.")
+    print("    The average height is: {}\n")
 
 
 
