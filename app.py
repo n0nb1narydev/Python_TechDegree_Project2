@@ -73,21 +73,45 @@ def create_teams():
 
 def guardian_list(team):
     guardian = []
-    print("\n        Guardians:")
+    print("\n        Guardians:\n")
     for i in range(0, 6, 1):
         guardian.append(", ".join(team[i]["guardians"].split(" and ")))
     print("    " + ", ".join(guardian))
 
 
 def display_team(team_name, team):
+    team_list = []
+    num_experienced = 0
+    num_inexperienced = 0
+    total_height = 0
+    avg_height = 0
+
     print(f"\n\n        {team_name} Stats\n      -----------------")
     print("\n        Players:\n")
-    for i in range(0, 6, 1):
-        print("          " + team[i]['name'])
-    guardian_list(team)
-    print("\n\n    There are {} experienced players, {} inexperienced players, and {} total players on this team.")
-    print("    The average height is: {}\n")
 
+    for i in range(0, 6, 1):
+        team_list.append(team[i]['name'])
+        if team[i]["experience"] == True:
+            num_experienced += 1
+        elif team[i]["experience"] == False:
+            num_inexperienced += 1
+        total_height += team[i]["height"]
+    avg_height = total_height / len(team_list)
+
+    print("    " + ", ".join(team_list))
+    guardian_list(team)
+    print("\n\n    There are {} experienced players, {} inexperienced players, and {} total players on this team.".format(num_experienced, num_inexperienced, len(team_list)))
+    print("    The average height is: {}\n\n\n".format(round(avg_height, 1)))
+    return_to_menu()
+
+
+
+def return_to_menu():
+    return_menu = input("Press 'R' to return to the main menu or 'Q' to quit: ")
+    if return_menu.upper() == 'R':
+        menu()
+    elif return_menu.upper() == "Q":
+        print("Thanks for using my stats tool!")
 
 
 if __name__ == "__main__":
