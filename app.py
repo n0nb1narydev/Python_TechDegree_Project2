@@ -2,20 +2,21 @@ import constants
 import copy
 
 
+
 teams = copy.deepcopy(constants.TEAMS)
 players = copy.deepcopy(constants.PLAYERS)
-
-
-
-
-
+experienced = []
+inexperienced = []
+bandits = []
+panthers = []
+warriors = []
 # function that balances players across the three teams
     # Ex: num_players_team = len(PLAYERS) / len(TEAMS)
 
 # when menu or stats display to console, should be readable with \n
 
 def menu():
-    print("            ________             \n    o      |   __   |            \n      \_ O |  |__|  |            \n   ____/ \ |___WW___|            \n   __/   /     ||                \n               ||                \n               ||                \n_______________||________________\n")
+    print("              ________             \n      o      |   __   |            \n        \_ O |  |__|  |            \n     ____/ \ |___WW___|            \n     __/   /     ||                \n                 ||                \n                 ||                \n  _______________||________________\n")
     print("=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=\n        BASKETBALL TEAM STATS\n=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=\n\n    --------- Main Menu ---------\n\n")
     
     print("     What would you like to do?\n\n        1) Display Team Stats\n        2) Quit\n\n")
@@ -33,39 +34,61 @@ def display_teams():
     try:
         second_command = int(input("\n\nEnter an option: "))
         if second_command == 1:
-            print("You Chose the Bandits")
+            display_team("Bandits", bandits)
         elif second_command == 2:
-            print("You Chose the Pathers")
+            display_team("Panthers", panthers)
         elif second_command == 3:
-            print("You Chose the Warriors")
+            display_team("Warriors", warriors)
         else:
             raise ValueError("Enter a valid number. Try again.")
     except ValueError:
         ("Enter a valid number")
 
 
-def convert_player_values():
+def convert_player_height():
     for player in players:
     # Converts height to integer
         height = player['height'].split(" ")
         player['height'] = int(height[0])
-        player['experience'] = bool(player['experience'])
 
-    # Converts experience to boolean
+
+def convert_player_exp():
+    for player in players:
         if player['experience'] == "YES":
             player['experience'] = bool("YES")
+            experienced.append(player)
         elif player['experience'] == "NO":
             player['experience'] = bool("")
-        
-        print(player['experience'])
+            inexperienced.append(player)
+
+
+def create_teams():
+    bandits.extend(experienced[:3])
+    bandits.extend(inexperienced[:3])
+    panthers.extend(experienced[3:6])
+    panthers.extend(inexperienced[3:6])
+    warriors.extend(experienced[6:])
+    warriors.extend(inexperienced[6:])
+
+
+def display_team(team_name, list):
+    print(f"\n\n        {team_name} Stats\n      -----------------")
+    print("\n        Players:\n")
+    for i in range(0, 6, 1):
+        print("        " + list[i]['name'])
+    print("\n          Guardians: ")
+    for i in range(0, 6, 1):
+        list[i]['guardians']
+    print("\n\n There are {} experienced players, {} inexperienced players, and {} total players on this team.")
+    print("The average height is: {}\n")
+
 
 
 if __name__ == "__main__":
-    convert_player_values()
-    # menu()
-    # Covert height to integer
-
-
-    # Convert experience to bool
-
-
+    convert_player_height()
+    convert_player_exp()
+    
+    
+    create_teams()
+    # To start game
+    menu()
