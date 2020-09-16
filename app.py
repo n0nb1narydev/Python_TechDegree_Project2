@@ -71,14 +71,22 @@ def create_teams():
     warriors.extend(inexperienced[6:])
 
 
-def display_team(team_name, list):
+def guardian_list(team):
+    guardian = []
+    print("\n        Guardians:")
+    for i in range(0, 6, 1):
+        guardian.append(team[i]['guardians'].split(","))
+    # ", ".join(guardian)
+        guardian.split("and")
+    print(guardian)
+
+
+def display_team(team_name, team):
     print(f"\n\n        {team_name} Stats\n      -----------------")
     print("\n        Players:\n")
     for i in range(0, 6, 1):
-        print("        " + list[i]['name'])
-    print("\n          Guardians: ")
-    for i in range(0, 6, 1):
-        list[i]['guardians']
+        print("          " + team[i]['name'])
+    guardian_list(team)
     print("\n\n There are {} experienced players, {} inexperienced players, and {} total players on this team.")
     print("The average height is: {}\n")
 
@@ -87,8 +95,8 @@ def display_team(team_name, list):
 if __name__ == "__main__":
     convert_player_height()
     convert_player_exp()
-    
-    
     create_teams()
+
+
     # To start game
     menu()
