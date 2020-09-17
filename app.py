@@ -2,7 +2,6 @@ import constants
 import copy
 
 
-
 teams = copy.deepcopy(constants.TEAMS)
 players = copy.deepcopy(constants.PLAYERS)
 experienced = []
@@ -10,10 +9,7 @@ inexperienced = []
 bandits = []
 panthers = []
 warriors = []
-# function that balances players across the three teams
-    # Ex: num_players_team = len(PLAYERS) / len(TEAMS)
 
-# when menu or stats display to console, should be readable with \n
 
 def menu():
     """ main menu called at the beginning and anytime return is selected """
@@ -114,6 +110,7 @@ def display_team(team_name, team):
     num_inexperienced = 0
     total_height = 0
     team_size = len(team_list)
+    avg_height = round(total_height / len(team_list), 1)
 
     print(f"\n\n        {team_name} Stats\n      -----------------")
     print("\n        Players:\n")
@@ -125,7 +122,6 @@ def display_team(team_name, team):
         elif team[i]["experience"] == False:
             num_inexperienced += 1
         total_height += team[i]["height"]
-    avg_height = round(total_height / len(team_list), 1)
 
     print("    " + ", ".join(team_list))
     guardian_list(team)
@@ -158,7 +154,5 @@ if __name__ == "__main__":
     convert_player_height()
     convert_player_exp()
     create_teams()
-
-
     # To start game
     menu()
