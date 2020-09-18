@@ -110,7 +110,7 @@ def display_team(team_name, team):
     num_inexperienced = 0
     total_height = 0
     team_size = len(team_list)
-    avg_height = round(total_height / len(team_list), 1)
+    avg_height = 0
 
     print(f"\n\n        {team_name} Stats\n      -----------------")
     print("\n        Players:\n")
@@ -126,7 +126,7 @@ def display_team(team_name, team):
     print("    " + ", ".join(team_list))
     guardian_list(team)
     print(f"\n\n    There are {num_experienced} experienced players, {num_inexperienced} inexperienced players, and {team_size} total players on this team.")
-    print(f"    The average height is: {avg_height}\n\n\n")
+    print("    The average height is: {}\n\n\n".format(round(total_height / len(team_list), 1)))
     return_to_menu()
 
 
